@@ -1,0 +1,28 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int rec(int x,int y){
+    int ans=0;
+    int c=0;
+    int pos=0;
+    while(x!=0 || y!=0){
+        int a=x%2;
+        int b=y%2;
+        int one=0;
+        if(a==1) one++;
+        if(b==1) one++;
+        if(c==1) one++;
+        c=one/2;
+        if(one%2)
+        ans=ans ^ 1<<pos;
+        pos++;
+        x=x>>1; y=y>>1;
+    }
+    if(c==1) ans= ans ^ 1<<pos;
+    return ans;
+}
+int main() {
+int x=8,y=90;
+cout<<rec(x,y);
+	return 0;
+}
