@@ -1,0 +1,50 @@
+#include<bits/stdc++.h>
+using namespace std;
+
+int parent[10000];
+int ran[10000];
+
+void makeset(){
+  for(int i=1;i<10000;i++){
+  	parent[i]=i;
+  	ran[i] = 0;
+  }
+}
+
+int findpar(int node){
+	if(node==parent[node])
+		return node;
+	return parent[node] = findpar(parent[node]); 
+}
+
+void unio(int u,int v){
+     u=findpar(u);
+     v=findpar(v);
+
+     if(ran[u] > ran[v])
+          parent[v]=u;
+    else if(ran[v]>ran[u])
+    	parent[u] = v;
+    else {
+    	parent[v] = u;
+    	ran[u]++;
+    }
+}  
+int main(){
+	ios:: sync_with_stdio(0);
+	cin.tie(0);
+    makeset();
+	int n,m;
+	cin>>n;
+	m=n;
+	while(n--){
+	  int u,v;
+     
+	  cin>>u>>v;
+      unio(u,v);
+     }
+   for(int i=1;i<=m;i++){
+   	cout<<ran[i]<<" ";
+   }
+ return 0;
+}
